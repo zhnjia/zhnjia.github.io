@@ -1,0 +1,94 @@
+#+OPTIONS: ^:nil toc:nil
+#+STARTUP: showall indent
+#+STARTUP: hidestars
+#+BEGIN_HTML
+---
+layout: default
+title: The English Knowledge You Must Know
+---
+#+END_HTML
+#+TOC: headlines 2
+
+* free
+** be free to do/be
+自由地做/成为...
+- On Facebook, you can *be free to be* who you want to be, as long as you don't mind being bombarded by adverts for the world's biggest brands.
+- In Istanbul, women should *be free to* pursue happines and live as they choose, instead of being confined by traditional marriage values, she said.
+** free with
+对...很随意、随便，强调的是“对某事不认真”
+- You are too *free with* your manners.
+- It seems people become very *free with* their money these days.
+** free of
+免除...，通常指免除租金、债务
+- He lived in a flat *free of* rent.
+- Westin is rolling out a program at all of its hotels in which guest can borrow New Balence sneakers and workout gear *free of* charge.
+** free from
+摆脱...，从疾病、惧怕、危险或错误等消失或好转，强调从负面的时间中好转
+- Even the wise are not always *free from* error.
+- You may have another certificate showing the goods to be *free from* radioactive contamination.
+- The Thai economy, like many in Asia, sprang *free from* the great recession surprisingly quickly.
+* read
+** read
+除了“读、读书”，还有“察觉、了解”的意思
+- They're pretty intuitive, and they can see it, they can *read* it.
+- Mr Lorry's bussiness eye *read* in the speaker's face that is was loss of time to dwell upon the point.
+** read of
+熟悉，了解
+- I *read of* the superstar's marriage in today's newspaper.
+- She had, I presume, *read of* how Garfield, Lincoln, and other Americans rose from poverty to fame and greatness.
+** draw out
+** 拔出、掏出
+draw为及物动词
+- He put a knife in a man and *drew* it out.
+** 发掘、挖掘
+draw为不及物动词
+- It's importent to *draw out* a child's pontential capacities.
+- The teacher helped to *draw out* the meaning of the poem.
+** 抽出、拉长
+draw通常为及物动词
+- The days begin to *draw out* after the winter solstice.
+- She *drew* the interview *out* to over an hour.
+** care about & care for
+take care of sb, "照顾、照料某人"
+** care about
+care用作谓语动词，与about搭配，表示feel interested in / be concerned about, “关心、担心、在乎”
+- If I *care about* you, I'm concerned about your growth, and I hope you will become all that you can become.
+- The world has to *care about* American's growth, since it is the importent driver of the global economy.
+** care for
+既可以表示“照顾、看护某人”，也可以表示“喜欢、想得到某物”
+- Brave Isabel, the poor little girl whose father gave up his life to *care for* her.
+- To *care for* wisdom and truth and the improvement of the soul is far better than to seek money and honour and reputation.
+* involve
+involve既可以作及物动词，也可以做不及物动词，差别很大
+** 及物动词
+表"包含、涉及"
+- However, the *innovation* can involve plenty of clever gadgets and gizmos.
+- Intercultrue communication *involves* different perceptions, attitudes and interpretations.
+** 不及物动词
+其固定搭配是be involved in或get involved in, 表示"卷入、干涉、参与"
+- By then, World War II had ended, but the United States *was involved in* the Korean War, so Starr decieded to become a military doctor.
+- Many nations around the world *are involved in* border disputs which have resulted in strained military relations.
+- Din't I say somethins about you not *getting involved in* that?
+* cease
+** cease to do
+强调“长时间甚至永远停止做某事”
+- Your voice service provider will soon *cease to* provide service.
+- The great tragedy of life is not that men perish, but that they *cease to* love.
+** cease doning
+强调“短时停止做某事，但以后还会接着做”
+- Never *cease trying* to be the best you can be -- that's under your control.
+- Moscow would also *cease issuing* visas to British officials -- although he insisted other visa applications would not be affected.
+* take leave
+** take leave
+告别、离开，或休假
+- The guest *took leave* after thanking the host.
+- The goverment has tried to address the problem by promoting telecommuting and encouraging workers to *take leave* when they start families or need to care for elderly parents.
+** take leave to
+冒昧做。。。
+- I *take leave to* be frank.
+- I *take leave to* differ from you.
+** 表示“冒昧做”的固定搭配
+- We *take liberty of* writing to you with a view to establish bussiness relations with you.
+- May I *make so bold to* ask what institution sponsored your experiment?
+- I *ventured to* say something of the kind to her, when she laughed at my clumsy compliment and said I had better take to writing fashion articles instead of political leaders.
+- I know my place and I wouldn't *presume to* tell an expert how to do his job.
