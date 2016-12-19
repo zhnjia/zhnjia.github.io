@@ -185,20 +185,20 @@ filename可能出现四种编码格式：<br  />
 根据上述理论依据，以及参考android的guessfilename函数filename做如下解析：<br  />
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #859900; font-weight: bold;">if</span> <span style="color: #2aa198;">(</span>Content-Disposition != null<span style="color: #2aa198;">)</span> <span style="color: #2aa198;">{</span>
-    <span style="color: #859900; font-weight: bold;">if</span> <span style="color: #b58900;">(</span>get<span style="color: #268bd2;">(</span><span style="color: #b58900;">filename</span>*<span style="color: #268bd2;">)</span> != null<span style="color: #b58900;">)</span> <span style="color: #b58900;">{</span>
-        rfc2231_decode<span style="color: #268bd2;">()</span>;
-    <span style="color: #b58900;">}</span> <span style="color: #859900; font-weight: bold;">else</span> <span style="color: #859900; font-weight: bold;">if</span> <span style="color: #b58900;">(</span>get<span style="color: #268bd2;">(</span>filename<span style="color: #268bd2;">)</span> != null<span style="color: #b58900;">)</span> <span style="color: #b58900;">{</span>
-        <span style="color: #859900; font-weight: bold;">if</span> <span style="color: #268bd2;">(</span>rfc2047_decode<span style="color: #6c71c4;">()</span> == ok<span style="color: #268bd2;">)</span> <span style="color: #859900; font-weight: bold;">return</span>;
-        <span style="color: #859900; font-weight: bold;">if</span> <span style="color: #268bd2;">(</span>IE_decode<span style="color: #6c71c4;">()</span> == ok<span style="color: #268bd2;">)</span> <span style="color: #859900; font-weight: bold;">return</span>;
-        rfc2616_decode<span style="color: #268bd2;">()</span>;
-    <span style="color: #b58900;">}</span>
-<span style="color: #2aa198;">}</span> <span style="color: #859900; font-weight: bold;">else</span> <span style="color: #2aa198;">{</span>
-    get_file_name_from_url<span style="color: #b58900;">()</span>;
-<span style="color: #2aa198;">}</span>
-<span style="color: #859900; font-weight: bold;">if</span> <span style="color: #2aa198;">(</span>mimetype != null<span style="color: #2aa198;">)</span> <span style="color: #2aa198;">{</span>
-    append_extention_to_filename<span style="color: #b58900;">()</span>;
-<span style="color: #2aa198;">}</span>
+<pre class="src src-c++">if (Content-Disposition != null) {
+    if (get(filename*) != null) {
+        rfc2231_decode();
+    } else if (get(filename) != null) {
+        if (rfc2047_decode() == ok) return;
+        if (IE_decode() == ok) return;
+        rfc2616_decode();
+    }
+} else {
+    get_file_name_from_url();
+}
+if (mimetype != null) {
+    append_extention_to_filename();
+}
 </pre>
 </div>
 </li>
@@ -252,17 +252,17 @@ sync &amp; echo 3 &gt; /proc/sys/vm/drop_caches<br  />
 <div class="outline-text-4" id="text-5-2-1">
 <div class="org-src-container">
 
-<pre class="src src-sh">$ setxkbmap -option <span style="color: #2aa198;">"ctrl:swapcaps"</span>
+<pre class="src src-sh">$ setxkbmap -option "ctrl:swapcaps"
 $ xmodmap
-  <span style="color: #b58900; font-weight: bold;">!</span>
-  <span style="color: #b58900; font-weight: bold;">!</span> Swap Caps_Lock and Control_L
-  <span style="color: #b58900; font-weight: bold;">!</span>
-  remove <span style="color: #268bd2;">Lock</span> = Caps_Lock
-  remove <span style="color: #268bd2;">Control</span> = Control_L
-  keysym <span style="color: #268bd2;">Control_L</span> = Caps_Lock
-  keysym <span style="color: #268bd2;">Caps_Lock</span> = Control_L
-  add <span style="color: #268bd2;">Lock</span> = Caps_Lock
-  add <span style="color: #268bd2;">Control</span> = Control_L
+  !
+  ! Swap Caps_Lock and Control_L
+  !
+  remove Lock = Caps_Lock
+  remove Control = Control_L
+  keysym Control_L = Caps_Lock
+  keysym Caps_Lock = Control_L
+  add Lock = Caps_Lock
+  add Control = Control_L
 </pre>
 </div>
 </div>
@@ -644,7 +644,7 @@ Master_key = PRF(premaster_secrect, "master secert", R1 + R2)<br  />
 <div class="outline-text-3" id="text-10-1">
 <div class="org-src-container">
 
-<pre class="src src-sh">$ git format -n commit //&#29983;&#25104;&#26368;&#36817;n&#20010;&#28857;&#30340;patch
+<pre class="src src-sh">$ git format -n commit //生成最近n个点的patch
 </pre>
 </div>
 </div>
@@ -678,15 +678,15 @@ Master_key = PRF(premaster_secrect, "master secert", R1 + R2)<br  />
 </ol>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #2aa198;">&lt;</span><span style="color: #b58900;">application</span><span style="color: #2aa198;">&gt;</span>
-        &lt;provider android:name=<span style="color: #2aa198;">".BookmarkProvider"</span>
-                  android:authorities=<span style="color: #2aa198;">"com.android.browser;browser"</span>
-                  android:multiprocess=<span style="color: #2aa198;">"false"</span>
-                  android:exported=<span style="color: #2aa198;">"true"</span>
-                  android:readPermission=<span style="color: #2aa198;">"com.android.browser.permission.READ_HISTORY_BOOKMARKS"</span>
-                  android:writePermission=<span style="color: #2aa198;">"com.android.browser.permission.WRITE_HISTORY_BOOKMARKS"</span>&gt;
-            &lt;path-permission android:path=<span style="color: #2aa198;">"/bookmarks/search_suggest_query"</span>
-                    android:readPermission=<span style="color: #2aa198;">"android.permission.GLOBAL_SEARCH"</span> /&gt;
+<pre class="src src-java">&lt;application&gt;
+        &lt;provider android:name=".BookmarkProvider"
+                  android:authorities="com.android.browser;browser"
+                  android:multiprocess="false"
+                  android:exported="true"
+                  android:readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS"
+                  android:writePermission="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS"&gt;
+            &lt;path-permission android:path="/bookmarks/search_suggest_query"
+                    android:readPermission="android.permission.GLOBAL_SEARCH" /&gt;
         &lt;/provider&gt;
     &lt;/application&gt;
 </pre>
@@ -719,14 +719,14 @@ Master_key = PRF(premaster_secrect, "master secert", R1 + R2)<br  />
 </ol>
 <div class="org-src-container">
 
-<pre class="src src-java">&lt;searchable xmlns:android=<span style="color: #2aa198;">"http://schemas.android.com/apk/res/android"</span>
-    android:label=<span style="color: #2aa198;">"@string/app_name_title"</span>
-    android:includeInGlobalSearch=<span style="color: #2aa198;">"true"</span>
-    android:searchSettingsDescription=<span style="color: #2aa198;">"@string/bookmarks_fragment_title"</span>
-    android:searchSuggestAuthority=<span style="color: #2aa198;">"com.android.browser"</span>
-    android:searchSuggestIntentAction=<span style="color: #2aa198;">"android.intent.action.VIEW"</span>
-    android:searchSuggestPath=<span style="color: #2aa198;">"bookmarks"</span>
-    android:searchSuggestSelection=<span style="color: #2aa198;">"url LIKE ?"</span>/&gt;
+<pre class="src src-java">&lt;searchable xmlns:android="http://schemas.android.com/apk/res/android"
+    android:label="@string/app_name_title"
+    android:includeInGlobalSearch="true"
+    android:searchSettingsDescription="@string/bookmarks_fragment_title"
+    android:searchSuggestAuthority="com.android.browser"
+    android:searchSuggestIntentAction="android.intent.action.VIEW"
+    android:searchSuggestPath="bookmarks"
+    android:searchSuggestSelection="url LIKE ?"/&gt;
 </pre>
 </div>
 <ol class="org-ol">
@@ -735,12 +735,12 @@ Master_key = PRF(premaster_secrect, "master secert", R1 + R2)<br  />
 </ol>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b58900;">SearchManager</span> <span style="color: #268bd2;">searchManager</span> = <span style="color: #2aa198;">(</span><span style="color: #b58900;">SearchManager</span><span style="color: #2aa198;">)</span> <span style="color: #859900; font-weight: bold;">this</span>.getSystemService<span style="color: #2aa198;">(</span><span style="color: #268bd2; font-weight: bold;">Context</span>.SEARCH_SERVICE<span style="color: #2aa198;">)</span>;
-        <span style="color: #b58900;">List</span><span style="color: #2aa198;">&lt;</span><span style="color: #b58900;">SearchableInfo</span><span style="color: #2aa198;">&gt;</span> <span style="color: #268bd2;">searchableInfos</span> = searchManager.getSearchablesInGlobalSearch<span style="color: #2aa198;">()</span>;
-        <span style="color: #859900; font-weight: bold;">if</span> <span style="color: #2aa198;">(</span>searchableInfos == <span style="color: #268bd2; font-weight: bold;">null</span><span style="color: #2aa198;">)</span> <span style="color: #859900; font-weight: bold;">return</span> <span style="color: #268bd2; font-weight: bold;">null</span>;
-        <span style="color: #859900; font-weight: bold;">for</span> <span style="color: #2aa198;">(</span><span style="color: #b58900;">SearchableInfo</span> <span style="color: #268bd2;">si</span> : searchableInfos<span style="color: #2aa198;">)</span> <span style="color: #2aa198;">{</span>
+<pre class="src src-java">SearchManager searchManager = (SearchManager) this.getSystemService(Context.SEARCH_SERVICE);
+        List&lt;SearchableInfo&gt; searchableInfos = searchManager.getSearchablesInGlobalSearch();
+        if (searchableInfos == null) return null;
+        for (SearchableInfo si : searchableInfos) {
             ...
-        <span style="color: #2aa198;">}</span>
+        }
 </pre>
 </div>
 </div>

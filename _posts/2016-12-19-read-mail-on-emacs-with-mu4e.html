@@ -1,0 +1,308 @@
+---
+layout: default
+title: Read Mail on Emacs with mu4e
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Rmail</a></li>
+<li><a href="#sec-2">2. mu4e</a>
+<ul>
+<li><a href="#sec-2-1">2.1. 下载邮件</a></li>
+<li><a href="#sec-2-2">2.2. 查看邮件</a></li>
+<li><a href="#sec-2-3">2.3. Key Bindings</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. enjoying!</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Rmail</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+emacs自带的Rmail是可以阅读邮件的，配合movemail程序，用很简单的配置就可以实现：<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;; emacs内置的movemail不支持imap，可以安装gnu mailutils提供的movemail以支持imap
+(setq rmail-movemail-program "/usr/bin/movemail")
+
+;; 设置imap服务
+(setq rmail-primary-inbox-list '("imap://me@somemail.com")
+      rmail-remote-password-required t
+      rmail-remote-password "xxxxxxxx"
+      )
+</pre>
+</div>
+<p>
+使用rmail命令就可以看到邮件了，rmail会调用movemail下载邮件，并展示一封邮件。但是Rmail的展示以及操作不太友好，于是就有了mu4e(mu for emacs).<br  />
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Rmail.html#Rmail">Referrence of Rmail</a><br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> mu4e</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+"mu4e is an emacs-based e-mail client. It’s based on the mu e-mail indexer/searcher. It attempts to be a super-efficient tool to withstand the daily e-mail tsunami."<br  />
+-&#x2014; <a href="https://www.emacswiki.org/emacs/mu4e">emacswiki</a><br  />
+</p>
+</div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> 下载邮件</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+我选择使用offlineimap下载邮件，vim时期配置过mutt，当时就用的offlineimap，觉得蛮好用的。<br  />
+offlineimap的配置网上也是很多，比如我自己的配置(~/.offlineimaprc)：<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">[general]
+accounts = mymail
+maxsyncaccounts = 3
+
+[Account mymail]
+localrepository = mymail-local
+remoterepository = mymail-remote
+status_backend = sqlite
+
+[Repository mymail-local]
+type = Maildir
+localfolders = ~/.mailbox
+
+[Repository mymail-remote]
+type = Gmail
+folderfilter = lambda folder: folder in ['[Gmail]/Archive', '[Gmail]/All Mail', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred']
+nametrans = lambda foldername: re.sub ('^\[gmail\].', '',
+                               re.sub ('all_mail', 'all',
+                               re.sub ('sent_mail', 'sent',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower())))))
+remoteuser = jiazhang@gmail.com
+remotepass = &lt;gmail app password&gt;
+ssl = yes
+maxconnections = 1
+realdelete = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+</pre>
+</div>
+<p>
+配置好，在终端跑一下offlineimap，看看是否可以下载邮件了。offlineimap配置OK了，就可开始配置mu4e。<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> 查看邮件</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+首先是安装mu，mu中提供mu4e，<a href="https://github.com/djcb/mu">Github</a>。<br  />
+可参考配置:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emcas-lisp">(add-to-list 'load-path "/usr/local/share/emacs/site-list/mu4e")
+(require 'mu4e)
+
+;; 这部分配置要跟offlineimap一致，否则看不到任何邮件
+(setq
+ mu4e-maildir "~/.mailbox"
+ mu4e-sent-folder "/sent"
+ mu4e-drafts-folder "/drafts"
+ mu4e-trash-folder "/trash"
+ mu4e-refile-folder "/archive"
+ mu4e-attachment-dir  "~/Downloads"
+ mu4e-html2text-command "html2text -utf8 -width 72")
+
+;; 这是跳转文件夹的快捷键设置
+(setq mu4e-maildir-shortcuts
+      '( ("/drafts"      . ?d)
+         ("/sent"        . ?s)
+         ("/trash"       . ?t)
+         ("/flagged"     . ?f)
+         ("/all"         . ?a)))
+
+;; 这是HV的展示设置
+(setq mu4e-headers-fields
+      '((:date          .  25)    ;m; alternatively, use :human-date
+        (:flags         .   6)
+        (:from          .  22)
+        (:subject       .  nil))) ;; alternatively, use :thread-subject
+
+(setq mu4e-get-mail-command "offlineimap"
+      mu4e-update-interval 300
+      message-send-mail-function 'smtpmail-send-it)
+</pre>
+</div>
+<p>
+emacs里执行mu4e就可以通过打开不通的文件查看邮件了。<br  />
+由于墙的原因，用的免费vpn发不了邮件，所以"smtpmail-smtp-server"和"smtpmail-smtp-service"没有setq，一个是服务，另一个是端口。<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Key Bindings</h3>
+<div class="outline-text-3" id="text-2-3">
+</div><div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Global</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">C-c C-u / C-S-u</td>
+<td class="left">Update email &amp; database</td>
+</tr>
+
+<tr>
+<td class="left">y</td>
+<td class="left">switch between header view and message view</td>
+</tr>
+
+<tr>
+<td class="left">s</td>
+<td class="left">searching, <a href="http://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries">quering email</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Header View</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">n / p</td>
+<td class="left">go to next/previous header, and update message view if it's open</td>
+</tr>
+
+<tr>
+<td class="left">] / [</td>
+<td class="left">go to next/previous unread header, and update message view if it's open</td>
+</tr>
+
+<tr>
+<td class="left">C-n / C-p</td>
+<td class="left">go to next/previous header</td>
+</tr>
+
+<tr>
+<td class="left">P</td>
+<td class="left">toggle threading</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a href="http://www.djcbsoftware.nl/code/mu/mu4e/Keybindings.html#Keybindings">more</a><br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-3-3" class="outline-4">
+<h4 id="sec-2-3-3"><span class="section-number-4">2.3.3</span> Message View</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">g</td>
+<td class="left">go to numbered url</td>
+</tr>
+
+<tr>
+<td class="left">k</td>
+<td class="left">save the numbered url in the kill-ring</td>
+</tr>
+
+<tr>
+<td class="left">o</td>
+<td class="left">open numbered attachment</td>
+</tr>
+
+<tr>
+<td class="left">e</td>
+<td class="left">save numbered attachment</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a href="http://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html#MSGV-Keybindings">more</a><br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-3-4" class="outline-4">
+<h4 id="sec-2-3-4"><span class="section-number-4">2.3.4</span> Mark for actions</h4>
+<div class="outline-text-4" id="text-2-3-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">? / !</td>
+<td class="left">mark message as unread/read</td>
+</tr>
+
+<tr>
+<td class="left">d / D</td>
+<td class="left">mark trash/delete</td>
+</tr>
+
+<tr>
+<td class="left">%</td>
+<td class="left">mark based on a regular expression</td>
+</tr>
+
+<tr>
+<td class="left">T / t</td>
+<td class="left">mark whole thread/subthread</td>
+</tr>
+
+<tr>
+<td class="left">x</td>
+<td class="left">execute actions for the marked messages</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a href="http://www.djcbsoftware.nl/code/mu/mu4e/Keybindings.html#Keybindings">more</a><br  />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> enjoying!</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<a href="http://www.djcbsoftware.nl/code/mu/mu4e/index.html#SEC_Contents">mu4e manual</a><br  />
+</p>
+</div>
+</div>

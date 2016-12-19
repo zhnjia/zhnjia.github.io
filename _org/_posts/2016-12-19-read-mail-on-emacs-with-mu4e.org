@@ -1,0 +1,128 @@
+#+OPTIONS: ^:nil toc:nil \n:t
+#+STARTUP: showall indent
+#+STARTUP: hidestars
+
+#+BEGIN_HTML
+---
+layout: default
+title: Read Mail on Emacs with mu4e
+---
+#+END_HTML
+#+TOC: headlines 2
+
+* Rmail
+emacs自带的Rmail是可以阅读邮件的，配合movemail程序，用很简单的配置就可以实现：
+#+BEGIN_SRC emacs-lisp
+;; emacs内置的movemail不支持imap，可以安装gnu mailutils提供的movemail以支持imap
+(setq rmail-movemail-program "/usr/bin/movemail")
+
+;; 设置imap服务
+(setq rmail-primary-inbox-list '("imap://me@somemail.com")
+      rmail-remote-password-required t
+      rmail-remote-password "xxxxxxxx"
+      )
+#+END_SRC
+使用rmail命令就可以看到邮件了，rmail会调用movemail下载邮件，并展示一封邮件。但是Rmail的展示以及操作不太友好，于是就有了mu4e(mu for emacs).
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Rmail.html#Rmail][Referrence of Rmail]]
+* mu4e
+"mu4e is an emacs-based e-mail client. It’s based on the mu e-mail indexer/searcher. It attempts to be a super-efficient tool to withstand the daily e-mail tsunami."
+---- [[https://www.emacswiki.org/emacs/mu4e][emacswiki]]
+** 下载邮件
+我选择使用offlineimap下载邮件，vim时期配置过mutt，当时就用的offlineimap，觉得蛮好用的。
+offlineimap的配置网上也是很多，比如我自己的配置(~/.offlineimaprc)：
+#+BEGIN_SRC sh
+[general]
+accounts = mymail
+maxsyncaccounts = 3
+
+[Account mymail]
+localrepository = mymail-local
+remoterepository = mymail-remote
+status_backend = sqlite
+
+[Repository mymail-local]
+type = Maildir
+localfolders = ~/.mailbox
+
+[Repository mymail-remote]
+type = Gmail
+folderfilter = lambda folder: folder in ['[Gmail]/Archive', '[Gmail]/All Mail', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred']
+nametrans = lambda foldername: re.sub ('^\[gmail\].', '',
+                               re.sub ('all_mail', 'all',
+                               re.sub ('sent_mail', 'sent',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower())))))
+remoteuser = jiazhang@gmail.com
+remotepass = <gmail app password>
+ssl = yes
+maxconnections = 1
+realdelete = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+#+END_SRC
+配置好，在终端跑一下offlineimap，看看是否可以下载邮件了。offlineimap配置OK了，就可开始配置mu4e。
+** 查看邮件
+首先是安装mu，mu中提供mu4e，[[https://github.com/djcb/mu][Github]]。
+可参考配置:
+#+BEGIN_SRC emcas-lisp
+(add-to-list 'load-path "/usr/local/share/emacs/site-list/mu4e")
+(require 'mu4e)
+
+;; 这部分配置要跟offlineimap一致，否则看不到任何邮件
+(setq
+ mu4e-maildir "~/.mailbox"
+ mu4e-sent-folder "/sent"
+ mu4e-drafts-folder "/drafts"
+ mu4e-trash-folder "/trash"
+ mu4e-refile-folder "/archive"
+ mu4e-attachment-dir  "~/Downloads"
+ mu4e-html2text-command "html2text -utf8 -width 72")
+
+;; 这是跳转文件夹的快捷键设置
+(setq mu4e-maildir-shortcuts
+      '( ("/drafts"      . ?d)
+         ("/sent"        . ?s)
+         ("/trash"       . ?t)
+         ("/flagged"     . ?f)
+         ("/all"         . ?a)))
+
+;; 这是HV的展示设置
+(setq mu4e-headers-fields
+      '((:date          .  25)    ;m; alternatively, use :human-date
+        (:flags         .   6)
+        (:from          .  22)
+        (:subject       .  nil))) ;; alternatively, use :thread-subject
+
+(setq mu4e-get-mail-command "offlineimap"
+      mu4e-update-interval 300
+      message-send-mail-function 'smtpmail-send-it)
+#+END_SRC
+emacs里执行mu4e就可以通过打开不通的文件查看邮件了。
+由于墙的原因，用的免费vpn发不了邮件，所以"smtpmail-smtp-server"和"smtpmail-smtp-service"没有setq，一个是服务，另一个是端口。
+** Key Bindings
+*** Global
+| C-c C-u / C-S-u | Update email & database                     |
+| y               | switch between header view and message view |
+| s               | searching, [[http://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries][quering email]]                                 |
+
+*** Header View
+| n / p     | go to next/previous header, and update message view if it's open        |
+| ] / [     | go to next/previous unread header, and update message view if it's open |
+| C-n / C-p | go to next/previous header                                              |
+| P         | toggle threading                                                                        |
+[[http://www.djcbsoftware.nl/code/mu/mu4e/Keybindings.html#Keybindings][more]]
+*** Message View
+| g | go to numbered url                     |
+| k | save the numbered url in the kill-ring |
+| o | open numbered attachment               |
+| e | save numbered attachment                          |
+[[http://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html#MSGV-Keybindings][more]]
+*** Mark for actions
+| ? / ! | mark message as unread/read             |
+| d / D | mark trash/delete                       |
+| %     | mark based on a regular expression      |
+| T / t | mark whole thread/subthread             |
+| x     | execute actions for the marked messages |
+[[http://www.djcbsoftware.nl/code/mu/mu4e/Keybindings.html#Keybindings][more]]
+
+* enjoying!
+[[http://www.djcbsoftware.nl/code/mu/mu4e/index.html#SEC_Contents][mu4e manual]]
