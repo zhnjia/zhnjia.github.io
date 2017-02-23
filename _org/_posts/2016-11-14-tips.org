@@ -290,6 +290,11 @@ $ git format -n commit //生成最近n个点的patch
 #+END_SRC
 **** 其他
 1. content uri格式: content://authority/path[/#id]
+2. command tools:
+#+BEGIN_SRC shell
+$ adb shell content
+#+END_SRC
+
 ** 小米adb
 1, *#*#717717#*#* 调试号码
 ** run-as

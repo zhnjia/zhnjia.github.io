@@ -1,32 +1,36 @@
----
-layout: default
-title: Read Mail on Emacs with mu4e
----
+<div class="HTML">
+<p>
+&#x2014;<br />
+layout: default<br />
+title: Read Mail on Emacs with mu4e<br />
+&#x2014;<br />
+</p>
+
+</div>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Rmail</a></li>
-<li><a href="#sec-2">2. mu4e</a>
+<li><a href="#org3a72c2c">1. Rmail</a></li>
+<li><a href="#org847464f">2. mu4e</a>
 <ul>
-<li><a href="#sec-2-1">2.1. 下载邮件</a></li>
-<li><a href="#sec-2-2">2.2. 查看邮件</a></li>
-<li><a href="#sec-2-3">2.3. Key Bindings</a></li>
+<li><a href="#orgd8285f6">2.1. 下载邮件</a></li>
+<li><a href="#org0e3d134">2.2. 查看邮件</a></li>
+<li><a href="#orgb2eb34b">2.3. Key Bindings</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3. enjoying!</a></li>
+<li><a href="#org34c5331">3. enjoying!</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Rmail</h2>
+<div id="outline-container-org3a72c2c" class="outline-2">
+<h2 id="org3a72c2c"><span class="section-number-2">1</span> Rmail</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-emacs自带的Rmail是可以阅读邮件的，配合movemail程序，用很简单的配置就可以实现：<br  />
+emacs自带的Rmail是可以阅读邮件的，配合movemail程序，用很简单的配置就可以实现：<br />
 </p>
 <div class="org-src-container">
-
 <pre class="src src-emacs-lisp">;; emacs内置的movemail不支持imap，可以安装gnu mailutils提供的movemail以支持imap
 (setq rmail-movemail-program "/usr/bin/movemail")
 
@@ -38,28 +42,27 @@ emacs自带的Rmail是可以阅读邮件的，配合movemail程序，用很简�
 </pre>
 </div>
 <p>
-使用rmail命令就可以看到邮件了，rmail会调用movemail下载邮件，并展示一封邮件。但是Rmail的展示以及操作不太友好，于是就有了mu4e(mu for emacs).<br  />
-<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Rmail.html#Rmail">Referrence of Rmail</a><br  />
+使用rmail命令就可以看到邮件了，rmail会调用movemail下载邮件，并展示一封邮件。但是Rmail的展示以及操作不太友好，于是就有了mu4e(mu for emacs).<br />
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Rmail.html#Rmail">Referrence of Rmail</a><br />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> mu4e</h2>
+<div id="outline-container-org847464f" class="outline-2">
+<h2 id="org847464f"><span class="section-number-2">2</span> mu4e</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-"mu4e is an emacs-based e-mail client. It’s based on the mu e-mail indexer/searcher. It attempts to be a super-efficient tool to withstand the daily e-mail tsunami."<br  />
--&#x2014; <a href="https://www.emacswiki.org/emacs/mu4e">emacswiki</a><br  />
+"mu4e is an emacs-based e-mail client. It’s based on the mu e-mail indexer/searcher. It attempts to be a super-efficient tool to withstand the daily e-mail tsunami."<br />
+-&#x2014; <a href="https://www.emacswiki.org/emacs/mu4e">emacswiki</a><br />
 </p>
 </div>
-<div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> 下载邮件</h3>
+<div id="outline-container-orgd8285f6" class="outline-3">
+<h3 id="orgd8285f6"><span class="section-number-3">2.1</span> 下载邮件</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-我选择使用offlineimap下载邮件，vim时期配置过mutt，当时就用的offlineimap，觉得蛮好用的。<br  />
-offlineimap的配置网上也是很多，比如我自己的配置(~/.offlineimaprc)：<br  />
+我选择使用offlineimap下载邮件，vim时期配置过mutt，当时就用的offlineimap，觉得蛮好用的。<br />
+offlineimap的配置网上也是很多，比如我自己的配置(~/.offlineimaprc)：<br />
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">[general]
 accounts = mymail
 maxsyncaccounts = 3
@@ -90,19 +93,18 @@ sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 </pre>
 </div>
 <p>
-配置好，在终端跑一下offlineimap，看看是否可以下载邮件了。offlineimap配置OK了，就可开始配置mu4e。<br  />
+配置好，在终端跑一下offlineimap，看看是否可以下载邮件了。offlineimap配置OK了，就可开始配置mu4e。<br />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> 查看邮件</h3>
+<div id="outline-container-org0e3d134" class="outline-3">
+<h3 id="org0e3d134"><span class="section-number-3">2.2</span> 查看邮件</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
-首先是安装mu，mu中提供mu4e，<a href="https://github.com/djcb/mu">Github</a>。<br  />
-可参考配置:<br  />
+首先是安装mu，mu中提供mu4e，<a href="https://github.com/djcb/mu">Github</a>。<br />
+可参考配置:<br />
 </p>
 <div class="org-src-container">
-
 <pre class="src src-emcas-lisp">(add-to-list 'load-path "/usr/local/share/emacs/site-list/mu4e")
 (require 'mu4e)
 
@@ -137,172 +139,172 @@ sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 </pre>
 </div>
 <p>
-emacs里执行mu4e就可以通过打开不通的文件查看邮件了。<br  />
-由于墙的原因，用的免费vpn发不了邮件，所以"smtpmail-smtp-server"和"smtpmail-smtp-service"没有setq，一个是服务，另一个是端口。<br  />
+emacs里执行mu4e就可以通过打开不通的文件查看邮件了。<br />
+由于墙的原因，用的免费vpn发不了邮件，所以"smtpmail-smtp-server"和"smtpmail-smtp-service"没有setq，一个是服务，另一个是端口。<br />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Key Bindings</h3>
+<div id="outline-container-orgb2eb34b" class="outline-3">
+<h3 id="orgb2eb34b"><span class="section-number-3">2.3</span> Key Bindings</h3>
 <div class="outline-text-3" id="text-2-3">
-</div><div id="outline-container-sec-2-3-1" class="outline-4">
-<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Global</h4>
+</div><div id="outline-container-orga059cb8" class="outline-4">
+<h4 id="orga059cb8"><span class="section-number-4">2.3.1</span> Global</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="left">C-c C-u / C-S-u</td>
-<td class="left">Update email &amp; database</td>
+<td class="org-left">C-c C-u / C-S-u</td>
+<td class="org-left">Update email &amp; database</td>
 </tr>
 
 <tr>
-<td class="left">y</td>
-<td class="left">switch between header view and message view</td>
+<td class="org-left">y</td>
+<td class="org-left">switch between header view and message view</td>
 </tr>
 
 <tr>
-<td class="left">s</td>
-<td class="left">searching, <a href="http://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries">quering email</a></td>
+<td class="org-left">s</td>
+<td class="org-left">searching, <a href="http://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries">quering email</a></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-sec-2-3-2" class="outline-4">
-<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Header View</h4>
+<div id="outline-container-orge9e6aeb" class="outline-4">
+<h4 id="orge9e6aeb"><span class="section-number-4">2.3.2</span> Header View</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="left">n / p</td>
-<td class="left">go to next/previous header, and update message view if it's open</td>
+<td class="org-left">n / p</td>
+<td class="org-left">go to next/previous header, and update message view if it's open</td>
 </tr>
 
 <tr>
-<td class="left">] / [</td>
-<td class="left">go to next/previous unread header, and update message view if it's open</td>
+<td class="org-left">] / [</td>
+<td class="org-left">go to next/previous unread header, and update message view if it's open</td>
 </tr>
 
 <tr>
-<td class="left">C-n / C-p</td>
-<td class="left">go to next/previous header</td>
+<td class="org-left">C-n / C-p</td>
+<td class="org-left">go to next/previous header</td>
 </tr>
 
 <tr>
-<td class="left">P</td>
-<td class="left">toggle threading</td>
+<td class="org-left">P</td>
+<td class="org-left">toggle threading</td>
 </tr>
 </tbody>
 </table>
 <p>
-<a href="http://www.djcbsoftware.nl/code/mu/mu4e/Keybindings.html#Keybindings">more</a><br  />
+<a href="http://www.djcbsoftware.nl/code/mu/mu4e/Keybindings.html#Keybindings">more</a><br />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2-3-3" class="outline-4">
-<h4 id="sec-2-3-3"><span class="section-number-4">2.3.3</span> Message View</h4>
+<div id="outline-container-orgf486050" class="outline-4">
+<h4 id="orgf486050"><span class="section-number-4">2.3.3</span> Message View</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="left">g</td>
-<td class="left">go to numbered url</td>
+<td class="org-left">g</td>
+<td class="org-left">go to numbered url</td>
 </tr>
 
 <tr>
-<td class="left">k</td>
-<td class="left">save the numbered url in the kill-ring</td>
+<td class="org-left">k</td>
+<td class="org-left">save the numbered url in the kill-ring</td>
 </tr>
 
 <tr>
-<td class="left">o</td>
-<td class="left">open numbered attachment</td>
+<td class="org-left">o</td>
+<td class="org-left">open numbered attachment</td>
 </tr>
 
 <tr>
-<td class="left">e</td>
-<td class="left">save numbered attachment</td>
+<td class="org-left">e</td>
+<td class="org-left">save numbered attachment</td>
 </tr>
 </tbody>
 </table>
 <p>
-<a href="http://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html#MSGV-Keybindings">more</a><br  />
+<a href="http://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html#MSGV-Keybindings">more</a><br />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2-3-4" class="outline-4">
-<h4 id="sec-2-3-4"><span class="section-number-4">2.3.4</span> Mark for actions</h4>
+<div id="outline-container-org2e2cbf1" class="outline-4">
+<h4 id="org2e2cbf1"><span class="section-number-4">2.3.4</span> Mark for actions</h4>
 <div class="outline-text-4" id="text-2-3-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="left">? / !</td>
-<td class="left">mark message as unread/read</td>
+<td class="org-left">? / !</td>
+<td class="org-left">mark message as unread/read</td>
 </tr>
 
 <tr>
-<td class="left">d / D</td>
-<td class="left">mark trash/delete</td>
+<td class="org-left">d / D</td>
+<td class="org-left">mark trash/delete</td>
 </tr>
 
 <tr>
-<td class="left">%</td>
-<td class="left">mark based on a regular expression</td>
+<td class="org-left">%</td>
+<td class="org-left">mark based on a regular expression</td>
 </tr>
 
 <tr>
-<td class="left">T / t</td>
-<td class="left">mark whole thread/subthread</td>
+<td class="org-left">T / t</td>
+<td class="org-left">mark whole thread/subthread</td>
 </tr>
 
 <tr>
-<td class="left">x</td>
-<td class="left">execute actions for the marked messages</td>
+<td class="org-left">x</td>
+<td class="org-left">execute actions for the marked messages</td>
 </tr>
 </tbody>
 </table>
 <p>
-<a href="http://www.djcbsoftware.nl/code/mu/mu4e/Keybindings.html#Keybindings">more</a><br  />
+<a href="http://www.djcbsoftware.nl/code/mu/mu4e/Keybindings.html#Keybindings">more</a><br />
 </p>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> enjoying!</h2>
+<div id="outline-container-org34c5331" class="outline-2">
+<h2 id="org34c5331"><span class="section-number-2">3</span> enjoying!</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-<a href="http://www.djcbsoftware.nl/code/mu/mu4e/index.html#SEC_Contents">mu4e manual</a><br  />
+<a href="http://www.djcbsoftware.nl/code/mu/mu4e/index.html#SEC_Contents">mu4e manual</a><br />
 </p>
 </div>
 </div>
