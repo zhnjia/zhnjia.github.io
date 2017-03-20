@@ -201,6 +201,8 @@ I	#+INCLUDE: line
 ** features
 *** coding
 1. [set-buffer-file-coding-system]: 设置文件编码
+*** log
+1. keep-lines/flush-lines
 * sql
 ** distinct
 1. select distinct(id) from table; [选择并去重]
