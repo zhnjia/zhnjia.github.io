@@ -12,7 +12,13 @@ title: Chromium Multi-process Architecture<br />
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgafd018c">1. 问题引入</a></li>
-<li><a href="#org312ba0b">2. 架构总揽</a></li>
+<li><a href="#org312ba0b">2. 架构总揽</a>
+<ul>
+<li><a href="#org222efab">2.1. 管理渲染进程</a></li>
+<li><a href="#org39db9af">2.2. 视图管理</a></li>
+</ul>
+</li>
+<li><a href="#org50c25bb">3. 组件和接口</a></li>
 </ul>
 </div>
 </div>
@@ -38,6 +44,53 @@ title: Chromium Multi-process Architecture<br />
 我们给每个标签页建立独立的进程，防止渲染引擎的bug和故障导致整个应用崩溃。同样限制渲染引擎之间，以及渲染引擎和其他部分的访问。也就是给网页浏览带来了内存保护以及操作系统的访问控制。<br />
 运行UI，管理标签和插件的进程成为"browser process"或"browser"。同样地，标签页进程称为"render process"或者"renders"。渲染引擎使用开源的Blink来解析布局HTML页面。<br />
 <a href="../img/arch.png ">../img/arch.png </a><br />
+</p>
+</div>
+<div id="outline-container-org222efab" class="outline-3">
+<h3 id="org222efab"><span class="section-number-3">2.1</span> 管理渲染进程</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+每个渲染进程都有一个全局的RenderProcess对象，用来跟父级浏览器进程进行通讯，并维护全局的状态。对应于每个渲染进程，browser维护一个RenderProcessHost对象，同时也负责管理browser状态以及与通信。渲染进程与browser使用<a href="https://sites.google.com/a/chromium.org/dev/developers/design-documents/inter-process-communication">Chromium's IPC system</a>.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org39db9af" class="outline-3">
+<h3 id="org39db9af"><span class="section-number-3">2.2</span> 视图管理</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+每个渲染进程都有一个或多个RenderView对象。这些对象由RenderProcess管理，对应于标签的内容。与<br />
+RenderProcess对应的RenderProcessHost维护一个RenderViewHost，RenderViewHost对应于渲染器里的一个视图。<br />
+每个视图都有一个ID，用于区分同一个渲染器里的多个视图。这个ID是只在渲染进程里唯一，browser内确定一个<br />
+视图需要RenderProcessHost和view ID才行。RenderViewHost可以使得browser和标签内容进行通信，因为它知道<br />
+如何通过RenderProcessHost向RenderProcess以及Renderview发送消息。<br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org50c25bb" class="outline-2">
+<h2 id="org50c25bb"><span class="section-number-2">3</span> 组件和接口</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+渲染进程:<br />
+</p>
+<ul class="org-ul">
+<li>RenderProcess处理与Browser里相关的RenderProcessHost的IPC。一个RenderProcess对象就是一个渲染进程。<br />
+这就是渲染器和browser如何通信的。<br /></li>
+<li>通过RenderProcess，RenderView对象与browser进程里对应的RenderViewHost相互通信，包括Webkit内嵌层。这<br />
+个对象表示一个页面或弹出窗口的内容。<br /></li>
+</ul>
+<p>
+浏览器进程:<br />
+</p>
+<ul class="org-ul">
+<li>Browser对象代表了最上层的浏览器窗口。<br /></li>
+<li>RenderProcessHost代表了浏览器侧的一个单一的browser与渲染器的IPC链接，并且RenderProcessHost与渲染器<br />
+进程是一对一的关系。<br /></li>
+<li>RenderViewHost封装了与远端RenderView的通信。RenderWidgetHost为browser内的RenderWidget处理输入和绘<br />
+画。<br /></li>
+</ul>
+<p>
+For more detailed information on how this embedding works, see the <a href="https://sites.google.com/a/chromium.org/dev/developers/design-documents/displaying-a-web-page-in-chrome">How Chromium displays web pages</a>.<br />
 </p>
 </div>
 </div>
