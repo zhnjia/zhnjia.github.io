@@ -16,11 +16,11 @@ Chromium源码里计算数组个数的算法：
 
 关于这个宏定义，有这样一段解释：
 
-> */ The arraysize(arr) macro returns the # of elements in an array arr.  The
-> /* expression is a compile-time constant, and therefore can be used in defining
-> */ new arrays, for example.  If you use arraysize on a pointer by mistake, you
-> /* will get a compile-time error.  For the technical details, refer to
-> // <http://blogs.msdn.com/b/the1/archive/2004/05/07/128242.aspx>.
+> The arraysize(arr) macro returns the # of elements in an array arr.  The
+> expression is a compile-time constant, and therefore can be used in defining
+> new arrays, for example.  If you use arraysize on a pointer by mistake, you
+> will get a compile-time error.  For the technical details, refer to
+> <http://blogs.msdn.com/b/the1/archive/2004/05/07/128242.aspx>.
 
 下面摘取了大部份原文，以供阅读：
 
