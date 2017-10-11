@@ -67,7 +67,7 @@ sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 (add-to-list 'load-path "/usr/local/share/emacs/site-list/mu4e")
 (require 'mu4e)
 
-;; 这部分配置要跟offlineimap一致，否则看不到任何邮件
+;; 这部分配置要跟offlineimap一致，否则看不到任何邮件啊
 (setq
  mu4e-maildir "~/.mailbox"
  mu4e-sent-folder "/sent"

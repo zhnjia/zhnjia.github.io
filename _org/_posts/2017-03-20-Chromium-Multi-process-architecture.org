@@ -10,7 +10,7 @@ title: Chromium Multi-process Architecture
 #+END_HTML
 #+TOC: headlines 2
 
-简单翻译下Chromium的多进程架构文档，原文档[[https://sites.google.com/a/chromium.org/dev/developers/design-documents/multi-process-architecture][Mulite-process Architecture]]
+简单翻译下Chromium的多进程架构文档，原文档猛击[[https://sites.google.com/a/chromium.org/dev/developers/design-documents/multi-process-architecture][Mulite-process Architecture]]
 
 * 问题引入
 几乎不可能建立一个不会崩溃或挂起的渲染引擎，同样也几乎不可能达到几乎完美的安全性能。

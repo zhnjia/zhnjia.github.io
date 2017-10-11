@@ -21,7 +21,7 @@ title: All tips
 
 * http
 ** content-encoding
- 1. rfc2616 规定传输的内容可以进行压缩传输，content-length为压缩后的文件大小
+ 1. rfc2616 规定传输的内容可以进行压缩后传输，content-length为压缩后的文件大小
  2. 其中content-encoding可以指定4种值：
     1) gzip, 用gnu zip格式压缩
     2) compress, 采用unix的文件压缩程序
