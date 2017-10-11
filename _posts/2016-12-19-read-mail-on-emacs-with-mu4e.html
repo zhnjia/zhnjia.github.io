@@ -31,14 +31,14 @@ title: Read Mail on Emacs with mu4e<br />
 emacs自带的Rmail是可以阅读邮件的，配合movemail程序，用很简单的配置就可以实现：<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">;; emacs内置的movemail不支持imap，可以安装gnu mailutils提供的movemail以支持imap
-(setq rmail-movemail-program "/usr/bin/movemail")
+<pre class="src src-emacs-lisp"><span style="color: #555f61;">;; </span><span style="color: #555f61;">emacs&#20869;&#32622;&#30340;movemail&#19981;&#25903;&#25345;imap&#65292;&#21487;&#20197;&#23433;&#35013;gnu mailutils&#25552;&#20379;&#30340;movemail&#20197;&#25903;&#25345;imap</span>
+<span style="color: #1395ba;">(</span><span style="color: #1395ba; font-weight: bold;">setq</span> rmail-movemail-program <span style="color: #a2b86c;">"/usr/bin/movemail"</span><span style="color: #1395ba;">)</span>
 
-;; 设置imap服务
-(setq rmail-primary-inbox-list '("imap://me@somemail.com")
+<span style="color: #555f61;">;; </span><span style="color: #555f61;">&#35774;&#32622;imap&#26381;&#21153;</span>
+<span style="color: #1395ba;">(</span><span style="color: #1395ba; font-weight: bold;">setq</span> rmail-primary-inbox-list <span style="color: #1395ba; font-weight: bold;">'</span><span style="color: #ecaa38;">(</span><span style="color: #a2b86c;">"imap://me@somemail.com"</span><span style="color: #ecaa38;">)</span>
       rmail-remote-password-required t
-      rmail-remote-password "xxxxxxxx"
-      )
+      rmail-remote-password <span style="color: #a2b86c;">"xxxxxxxx"</span>
+      <span style="color: #1395ba;">)</span>
 </pre>
 </div>
 <p>
@@ -63,33 +63,33 @@ emacs自带的Rmail是可以阅读邮件的，配合movemail程序，用很简�
 offlineimap的配置网上也是很多，比如我自己的配置(~/.offlineimaprc)：<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">[general]
-accounts = mymail
-maxsyncaccounts = 3
+<pre class="src src-sh"><span style="color: #1395ba;">[</span>general<span style="color: #1395ba;">]</span>
+<span style="color: #5ca793;">accounts</span> = mymail
+<span style="color: #5ca793;">maxsyncaccounts</span> = 3
 
-[Account mymail]
-localrepository = mymail-local
-remoterepository = mymail-remote
-status_backend = sqlite
+<span style="color: #1395ba;">[</span>Account mymail<span style="color: #1395ba;">]</span>
+<span style="color: #5ca793;">localrepository</span> = mymail-local
+<span style="color: #5ca793;">remoterepository</span> = mymail-remote
+<span style="color: #5ca793;">status_backend</span> = sqlite
 
-[Repository mymail-local]
-type = Maildir
-localfolders = ~/.mailbox
+<span style="color: #1395ba;">[</span>Repository mymail-local<span style="color: #1395ba;">]</span>
+<span style="color: #5ca793;">type</span> = Maildir
+<span style="color: #5ca793;">localfolders</span> = ~/.mailbox
 
-[Repository mymail-remote]
-type = Gmail
-folderfilter = lambda folder: folder in ['[Gmail]/Archive', '[Gmail]/All Mail', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred']
-nametrans = lambda foldername: re.sub ('^\[gmail\].', '',
-                               re.sub ('all_mail', 'all',
-                               re.sub ('sent_mail', 'sent',
-                               re.sub ('starred', 'flagged',
-                               re.sub (' ', '_', foldername.lower())))))
-remoteuser = jiazhang@gmail.com
-remotepass = &lt;gmail app password&gt;
-ssl = yes
-maxconnections = 1
-realdelete = no
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+<span style="color: #1395ba;">[</span>Repository mymail-remote<span style="color: #1395ba;">]</span>
+<span style="color: #5ca793;">type</span> = Gmail
+<span style="color: #5ca793;">folderfilter</span> = lambda folder: folder<span style="color: #1395ba; font-weight: bold;"> in</span> <span style="color: #1395ba;">[</span><span style="color: #a2b86c;">'[Gmail]/Archive'</span>, <span style="color: #a2b86c;">'[Gmail]/All Mail'</span>, <span style="color: #a2b86c;">'[Gmail]/Drafts'</span>, <span style="color: #a2b86c;">'[Gmail]/Sent Mail'</span>, <span style="color: #a2b86c;">'[Gmail]/Starred'</span><span style="color: #1395ba;">]</span>
+<span style="color: #5ca793;">nametrans</span> = lambda foldername: re.sub <span style="color: #1395ba;">(</span><span style="color: #a2b86c;">'^\[gmail\].'</span>, <span style="color: #a2b86c;">''</span>,
+                               re.sub <span style="color: #ecaa38;">(</span><span style="color: #a2b86c;">'all_mail'</span>, <span style="color: #a2b86c;">'all'</span>,
+                               re.sub <span style="color: #a2b86c;">(</span><span style="color: #a2b86c;">'sent_mail'</span>, <span style="color: #a2b86c;">'sent'</span>,
+                               re.sub <span style="color: #40805b;">(</span><span style="color: #a2b86c;">'starred'</span>, <span style="color: #a2b86c;">'flagged'</span>,
+                               re.sub <span style="color: #b1951d;">(</span><span style="color: #a2b86c;">' '</span>, <span style="color: #a2b86c;">'_'</span>, foldername.lower<span style="color: #1395ba;">()</span><span style="color: #b1951d;">)</span><span style="color: #40805b;">)</span><span style="color: #a2b86c;">)</span><span style="color: #ecaa38;">)</span><span style="color: #1395ba;">)</span>
+<span style="color: #5ca793;">remoteuser</span> = jiazhang@gmail.com
+<span style="color: #5ca793;">remotepass</span> = &lt;gmail app password&gt;
+<span style="color: #5ca793;">ssl</span> = yes
+<span style="color: #5ca793;">maxconnections</span> = 1
+<span style="color: #5ca793;">realdelete</span> = no
+<span style="color: #5ca793;">sslcacertfile</span> = /etc/ssl/certs/ca-certificates.crt
 </pre>
 </div>
 <p>
@@ -147,7 +147,8 @@ emacs里执行mu4e就可以通过打开不通的文件查看邮件了。<br />
 <div id="outline-container-orgb2eb34b" class="outline-3">
 <h3 id="orgb2eb34b"><span class="section-number-3">2.3</span> Key Bindings</h3>
 <div class="outline-text-3" id="text-2-3">
-</div><div id="outline-container-orga059cb8" class="outline-4">
+</div>
+<div id="outline-container-orga059cb8" class="outline-4">
 <h4 id="orga059cb8"><span class="section-number-4">2.3.1</span> Global</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
