@@ -2,12 +2,10 @@
 #+STARTUP: showall indent
 #+STARTUP: hidestars
 
-#+BEGIN_HTML
----
+#+md: ---
 layout: default
 title: All tips
----
-#+END_HTML
+#+md: ---
 #+TOC: headlines 2
 
 * java

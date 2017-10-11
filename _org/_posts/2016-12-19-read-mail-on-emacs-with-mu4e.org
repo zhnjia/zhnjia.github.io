@@ -2,12 +2,10 @@
 #+STARTUP: showall indent
 #+STARTUP: hidestars
 
-#+BEGIN_HTML
----
+#+md: ---
 layout: default
 title: Read Mail on Emacs with mu4e
----
-#+END_HTML
+#+md: ---
 #+TOC: headlines 2
 
 * Rmail

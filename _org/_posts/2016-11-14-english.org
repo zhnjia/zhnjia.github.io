@@ -2,12 +2,10 @@
 #+STARTUP: showall indent
 #+STARTUP: hidestars
 
-#+BEGIN_HTML
----
+#+md: ---
 layout: default
 title: The English Knowledge You Must Know
----
-#+END_HTML
+#+md: ---
 #+TOC: headlines 2
 
 * free
