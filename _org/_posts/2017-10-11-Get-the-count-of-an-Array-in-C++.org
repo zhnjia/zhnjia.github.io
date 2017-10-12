@@ -6,7 +6,6 @@
 layout: default
 title: How Would You Get the Count of an Array in C++?
 #+md: ---
-#+TOC: headlines 2
 
 Chromium源码里计算数组个数的算法：
 #+BEGIN_SRC C

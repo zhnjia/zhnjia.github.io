@@ -5,9 +5,6 @@ title: How Would You Get the Count of an Array in C++?
 
 ---
 
-
-# Table of Contents
-
 Chromium源码里计算数组个数的算法：
 
     template <typename T, size_t N>
