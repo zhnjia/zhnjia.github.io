@@ -1,0 +1,60 @@
+#+OPTIONS: ^:nil toc:nil \n:t
+#+STARTUP: showall indent
+#+STARTUP: hidestars
+
+#+md: ---
+layout: default
+title: Setup A Systemd Service
+#+md: ---
+#+TOC: headlines 1
+
+添加一项需要长期在后台运行的任务，可以选择将其添加到系统服务。下面将以shadowsocks为例演示如何使用systemd添加一项服务：
+参考连接：http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
+
+* 添加配置文件
+#+BEGIN_SRC sh
+$ cat /lib/systemd/system/shadowsocks.service
+[Unit]
+Description=Shadow Socks
+After=network-online.target
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/sslocal -c /etc/ss.json
+ExecStop=/bin/kill -9 $MAINPID
+[Install]
+WantedBy=multi-user.target
+WantedBy=graphical.target
+#+END_SRC
+简单解释下：
+#+BEGIN_QUOTE
+[Unit]
+After: 何时启动
+[Service]
+Execstart: 任务启动命令
+Execstop: 如何结束任务
+[Install]
+Wantedby: 与其他服务的依赖关系
+#+END_QUOTE
+Unit->After
+* 任务管理
+** 激活
+#+BEGIN_SRC sh
+$ sudo systemctl enable shadowsocks
+#+END_SRC
+** 启动
+#+BEGIN_SRC sh
+$ sudo systemctl start shadowsocks
+#+END_SRC
+** 停止
+#+BEGIN_SRC sh
+$ sudo systemctl stop shadowsocks
+#+END_SRC
+** 状态
+#+BEGIN_SRC sh
+$ systemctl status shadowsocks
+#+END_SRC
+** 更新配置文件
+#+BEGIN_SRC sh
+$ sudo systemctl daemon-reload
+#+END_SRC
+修改配置文件后，需要reload才能刷新到system
