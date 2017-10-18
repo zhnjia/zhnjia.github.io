@@ -32,7 +32,7 @@ title: Chromium Multi-process Architecture
 
 我们给每个标签页建立独立的进程，防止渲染引擎的bug和故障导致整个应用崩溃。同样限制渲染引擎之间，以及渲染引擎和其他部分的访问。也就是给网页浏览带来了内存保护以及操作系统的访问控制。
 运行UI，管理标签和插件的进程成为"browser process"或"browser"。同样地，标签页进程称为"render process"或者"renders"。渲染引擎使用开源的Blink来解析布局HTML页面。
-<../img/arch.png >
+![img]({{"/assets/arch.png" | absolute_url}})
 
 
 <a id="org222efab"></a>

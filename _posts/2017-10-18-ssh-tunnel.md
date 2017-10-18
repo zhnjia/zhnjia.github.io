@@ -21,8 +21,7 @@ SSH隧道提供了一种通过公网电脑，利用SSH反向代理，使得位�
 
 # 拓扑图
 
-
-![img]({{ "/assets/sshtunnel.png" | absolute_url }})
+![img]({{"/assets/sshtunnel.png" | absolute_url}})
 
 
 <a id="org948265a"></a>
@@ -37,8 +36,8 @@ SSH隧道提供了一种通过公网电脑，利用SSH反向代理，使得位�
 
 ## Office
 
-1, 将本地用户itsme的key上传至Cloud（这步可以不做，只是省得每次登录要输入密码）
-2, 安装autossh，并配置成系统服务：
+1.  将本地用户itsme的key上传至Cloud（这步可以不做，只是省得每次登录要输入密码）
+2.  安装autossh，并配置成系统服务：
 
     $ cat /lib/systemd/system/autossh.service
     [Unit]
@@ -55,13 +54,13 @@ SSH隧道提供了一种通过公网电脑，利用SSH反向代理，使得位�
     WantedBy=multi-user.target
     WantedBy=graphical.target
 
-3, 修改ssh\_config, 添加如下两行，确保ssh连接稳定：
+1.  修改ssh\_config, 添加如下两行，确保ssh连接稳定：
 
     $ tail /etc/ssh/ssh_config -n2
         ServerAliveInterval 10
         ServerAliveCountMax 100
 
-4, 激活并启动autossh.service
+1.  激活并启动autossh.service
 
 
 ## Home
@@ -75,7 +74,7 @@ SSH隧道提供了一种通过公网电脑，利用SSH反向代理，使得位�
 
 # 其他
 
-1, 启动autossh.service后，检查隧道是否建立成功，尤其是遇到“Connection refused”错误是，要查看Cloud端的端口：
+1.  启动autossh.service后，检查隧道是否建立成功，尤其是遇到“Connection refused”错误是，要查看Cloud端的端口：
 
     $ sudo netstat -tunlp
     Active Internet connections (only servers)
@@ -88,6 +87,8 @@ SSH隧道提供了一种通过公网电脑，利用SSH反向代理，使得位�
     udp6       0      0 :::123                  :::*                                790/ntpd
 
 看到60322和60323这两个端口对应的Local Address是0.0.0.0，就表示隧道已经打通；如果是127.0.0.1, 那会报"Connecting refused"!
+
 如果Local Address显示的是127.0.0.1:60322, Debian系列的发行版请添加"GatewayPorts yes"到/etc/ssh/sshd\_config, 其他的添加
 到/etc/ssh/ssh\_config.
-2, 如果使用阿里云之类的服务，记得修改“安全组”，把60322/60323这两个端口添加到白名单。
+
+1.  如果使用阿里云之类的服务，记得修改“安全组”，把60322/60323这两个端口添加到白名单。
