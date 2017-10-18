@@ -21,7 +21,7 @@ SSH隧道提供了一种通过公网电脑，利用SSH反向代理，使得位�
 
 # 拓扑图
 
-![img]({{"/_img/sshtunnel.png" | absolute_url }})
+![img](/_img/sshtunnel.png){:class="img-responsive"}
 
 
 <a id="org948265a"></a>
