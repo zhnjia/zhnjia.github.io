@@ -8,8 +8,9 @@ title: Setup A Systemd Service
 #+md: ---
 #+TOC: headlines 1
 
-添加一项需要长期在后台运行的任务，可以选择将其添加到系统服务。下面将以shadowsocks为例演示如何使用systemd添加一项服务：
-参考连接：http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
+添加一项需要长期在后台运行的任务，可以选择将其添加到系统服务。下面将以shadowsocks为例演示如何使用systemd添加一项服务。
+
+参考链接：http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
 
 * 添加配置文件
 #+BEGIN_SRC sh
@@ -35,7 +36,6 @@ Execstop: 如何结束任务
 [Install]
 Wantedby: 与其他服务的依赖关系
 #+END_QUOTE
-Unit->After
 * 任务管理
 ** 激活
 #+BEGIN_SRC sh

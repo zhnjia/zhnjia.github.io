@@ -11,8 +11,9 @@ title: Setup A Systemd Service
 1.  [添加配置文件](#orga7b2468)
 2.  [任务管理](#orge6af97c)
 
-添加一项需要长期在后台运行的任务，可以选择将其添加到系统服务。下面将以shadowsocks为例演示如何使用systemd添加一项服务：
-参考连接：<http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html>
+添加一项需要长期在后台运行的任务，可以选择将其添加到系统服务。下面将以shadowsocks为例演示如何使用systemd添加一项服务。
+
+参考链接：<http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html>
 
 
 <a id="orga7b2468"></a>
@@ -40,8 +41,6 @@ title: Setup A Systemd Service
 > Execstop: 如何结束任务
 > [Install]
 > Wantedby: 与其他服务的依赖关系
-
-Unit->After
 
 
 <a id="orge6af97c"></a>
