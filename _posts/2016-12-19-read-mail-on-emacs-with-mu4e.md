@@ -1,6 +1,6 @@
 ---
 
-layout: default
+layout: page
 title: Read Mail on Emacs with mu4e
 
 ---

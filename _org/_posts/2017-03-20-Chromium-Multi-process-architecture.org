@@ -3,7 +3,7 @@
 #+STARTUP: hidestars
 
 #+md: ---
-layout: default
+layout: page
 title: Chromium Multi-process Architecture
 #+md: ---
 #+TOC: headlines 2

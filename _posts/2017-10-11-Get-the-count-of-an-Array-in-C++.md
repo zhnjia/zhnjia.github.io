@@ -1,6 +1,6 @@
 ---
 
-layout: default
+layout: page
 title: How Would You Get the Count of an Array in C++?
 
 ---

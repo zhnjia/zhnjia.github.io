@@ -1,0 +1,23 @@
+<h6>Follow me</h6>
+
+<ul class="social-media">
+
+  {% if site.social.github %}
+    <li>
+      <a title="{{ site.social.github }} on Github" href="https://github.com/{{ site.social.github }}" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    </li>
+  {% endif %}
+
+  {% if site.social.linkedin %}
+    <li>
+      <a title="{{ site.social.linkedin }} on LinkedIn" href="https://www.linkedin.com/in/{{ site.social.linkedin }}" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
+    </li>
+  {% endif %}
+
+  {% if site.social.rss %}
+    <li>
+      <a title="{{ site.social.rss }} RSS" href="{{ site.baseurl }}/{{ site.social.rss }}" target="_blank"><i class="fa fa-rss fa-2x"></i></a>
+    </li>
+  {% endif %}
+
+</ul>
