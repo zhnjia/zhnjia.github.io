@@ -41,13 +41,13 @@ title: All tips
     disp-extension-token = token
     disp-extension-parm = token "=" ( token | quoted-string )
     #+END_QUOTE
-其中就定义了filename,标准中指明filename不允许指定文件路径，仅作为完整文件名的最后一部分。
-还有一个例子：
+    其中就定义了filename,标准中指明filename不允许指定文件路径，仅作为完整文件名的最后一部分。
+    还有一个例子：
     #+BEGIN_QUOTE
     Content-Disposition: attachment; filename="fname.ext"
     #+END_QUOTE
-由此最早filename应该是"＝"后用（"）包含起来的ASCII码字符串，ISO-8859-1以外的字符
-应根据rfc2047 进行转换转换规则为
+    由此最早filename应该是"＝"后用（"）包含起来的ASCII码字符串，ISO-8859-1以外的字符
+    应根据rfc2047 进行转换转换规则为
     #+BEGIN_QUOTE
     filename = "=?" charset "?" encoding "?" encoded-text "?="。
     #+END_QUOTE
