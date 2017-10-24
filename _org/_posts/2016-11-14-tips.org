@@ -27,12 +27,12 @@ title: All tips
     4) identity, 没有编码，如果没有content-encoding, 就默认为这种方式
 ** filename
  1. filename最早出现在rfc1806 中对"Content-Dispositon" 的定义：
-    #+BEGIN_VERSE
+    #+BEGIN_QUOTE
     filename-parm := "filename" "=" value;
-    #+END_VERSE
+    #+END_QUOTE
     value的取值根据rfc822 和rfc1521 定义。
  2. 之后rfc2626(1999年http1.1标准），第19.5.1节介绍了"Content-Disposition"的定义[[[http://tools.ietf.org/html/rfc2616#section-19.5.1][rfc2616#section-19.5.1]]]
-    #+BEGIN_VERSE
+    #+BEGIN_QUOTE
     content-disposition = "Content-Disposition" ":"
     disposition-type *( ";" disposition-parm )
     disposition-type = "attachment" | disp-extension-token
@@ -40,17 +40,26 @@ title: All tips
     filename-parm = "filename" "=" quoted-string
     disp-extension-token = token
     disp-extension-parm = token "=" ( token | quoted-string )
-    #+END_VERSE
-   其中就定义了filename,标准中指明filename不允许指定文件路径，仅作为完整文件名的最
-   后一部分。还有一个例子：Content-Disposition: attachment; filename="fname.ext"。
-   由此最早filename应该是"＝"后用（"）包含起来的ASCII码字符串，ISO-8859-1以外的字符
-   应根据rfc2047 进行转换转换规则为filename= "=?" charset "?" encoding "?" encoded-text "?="。
- 3. rfc2231 对rfc2047 的转换规则添加了扩展, 支持filename*= charset "'" [language] "'" encoded-text(percent-encode);
+    #+END_QUOTE
+其中就定义了filename,标准中指明filename不允许指定文件路径，仅作为完整文件名的最后一部分。
+还有一个例子：
+    #+BEGIN_QUOTE
+    Content-Disposition: attachment; filename="fname.ext"
+    #+END_QUOTE
+由此最早filename应该是"＝"后用（"）包含起来的ASCII码字符串，ISO-8859-1以外的字符
+应根据rfc2047 进行转换转换规则为
+    #+BEGIN_QUOTE
+    filename = "=?" charset "?" encoding "?" encoded-text "?="。
+    #+END_QUOTE
+ 3. rfc2231 对rfc2047 的转换规则添加了扩展, 支持
+    #+BEGIN_QUOTE
+    filename*= charset "'" [language] "'" encoded-text(percent-encode);
+    #+END_QUOTE
    （根据网上反馈资料，为了适配IE浏览器而采用的是混合模式，即：filename="encoded-text")
  4. 随着网络的发展，2011年rfc6266 对Content-Disposition 进行了规范。rfc6266指明：
-    #+BEGIN_VERSE
+    #+BEGIN_QUOTE
     filename-parm = "filename" "=" value | "filename*" "=" ext-value
-    #+END_VERSE
+    #+END_QUOTE
     - 如果使用filename ＝ value, value使用rfc2616的定义
     - 如果使用filename *＝ ext-value, ext-value使用rfc5987的定义，rfc5987 规定采用rfc2231 的转换规则
 
@@ -182,7 +191,7 @@ tail -f /var/log/syslog
 1. 'C-c C-j' : org-goto
 2. 'C-c C-v' : org-babel
 3. To insert a structural element, type a ‘<’, followed by a template selector and <TAB>.
-   #+BEGIN_VERSE
+   #+BEGIN_QUOTE
    s      #+BEGIN_SRC ... #+END_SRC
    e      #+BEGIN_EXAMPLE ... #+END_EXAMPLE
    q      #+BEGIN_QUOTE ... #+END_QUOTE
@@ -196,7 +205,7 @@ tail -f /var/log/syslog
    A      #+ASCII:
    i      #+INDEX: line
    I      #+INCLUDE: line
-   #+END_VERSE
+   #+END_QUOTE
 ** packages
 *** update
 1. [list-packages]: press 'U' for all packages which can be upgraded, and key 'x' to do upgrading.
