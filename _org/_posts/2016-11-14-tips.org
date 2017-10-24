@@ -208,11 +208,11 @@ tail -f /var/log/syslog
    #+END_QUOTE
 ** packages
 *** update
-1. [list-packages]: press 'U' for all packages which can be upgraded, and key 'x' to do upgrading.
-2. [helm-list-elisp-packages]: 'M-U'
+1. list-packages: press 'U' for all packages which can be upgraded, and key 'x' to do upgrading.
+
 ** features
 *** coding
-1. [set-buffer-file-coding-system]: 设置文件编码
+1. set-buffer-file-coding-system: 设置文件编码
 *** log
 1. keep-lines/flush-lines
 * sql
