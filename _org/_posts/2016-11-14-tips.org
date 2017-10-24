@@ -127,6 +127,11 @@ tail -f /var/log/syslog
 3, ":=" 简单扩展变量：在变量的定义点，按照被引用的变量的当前值进行展开
 4, "+=" 为已定义的变量添加新的值
 5, "?=" 赋默认值：如果没有初始化该变量，就给它赋上默认值
+** disk
+1. 添加ssd硬盘
+#+BEGIN_QUOTE
+/dev/sdb1       /ssd            ext4    noatime,discard,defaults    0       3
+#+END_QUOTE
 * emacs
 ** key
 *** Blank
