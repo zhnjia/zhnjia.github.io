@@ -182,21 +182,21 @@ tail -f /var/log/syslog
 1. 'C-c C-j' : org-goto
 2. 'C-c C-v' : org-babel
 3. To insert a structural element, type a ‘<’, followed by a template selector and <TAB>.
-#+BEGIN_VERSE
-s	#+BEGIN_SRC ... #+END_SRC
-e	#+BEGIN_EXAMPLE ... #+END_EXAMPLE
-q	#+BEGIN_QUOTE ... #+END_QUOTE
-v	#+BEGIN_VERSE ... #+END_VERSE
-c	#+BEGIN_CENTER ... #+END_CENTER
-l	#+BEGIN_LaTeX ... #+END_LaTeX
-L	#+LaTeX:
-h	#+BEGIN_HTML ... #+END_HTML
-H	#+HTML:
-a	#+BEGIN_ASCII ... #+END_ASCII
-A	#+ASCII:
-i	#+INDEX: line
-I	#+INCLUDE: line
-#+END_VERSE
+   #+BEGIN_VERSE
+   s	#+BEGIN_SRC ... #+END_SRC
+   e	#+BEGIN_EXAMPLE ... #+END_EXAMPLE
+   q	#+BEGIN_QUOTE ... #+END_QUOTE
+   v	#+BEGIN_VERSE ... #+END_VERSE
+   c	#+BEGIN_CENTER ... #+END_CENTER
+   l	#+BEGIN_LaTeX ... #+END_LaTeX
+   L	#+LaTeX:
+   h	#+BEGIN_HTML ... #+END_HTML
+   H	#+HTML:
+   a	#+BEGIN_ASCII ... #+END_ASCII
+   A	#+ASCII:
+   i	#+INDEX: line
+   I	#+INCLUDE: line
+   #+END_VERSE
 ** packages
 *** update
 1. [list-packages]: press 'U' for all packages which can be upgraded, and key 'x' to do upgrading.
