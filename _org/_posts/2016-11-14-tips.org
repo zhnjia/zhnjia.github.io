@@ -74,7 +74,7 @@ title: All tips
    根据上述理论依据，以及参考android的guessfilename函数filename做如下解析：
    #+BEGIN_SRC c++
      if (Content-Disposition != null) {
-         if (get(filename*) != null) {
+         if (get(filename) != null) {
              rfc2231_decode();
          } else if (get(filename) != null) {
              if (rfc2047_decode() == ok) return;
